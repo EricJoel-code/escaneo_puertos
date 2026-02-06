@@ -1,46 +1,133 @@
-# Escáner de Puertos en Python
+🔍 Escáner de Puertos en Python
 
-Este proyecto es una aplicación de escaneo de puertos implementada en Python con una interfaz gráfica utilizando `tkinter`. La aplicación permite escanear una dirección IP en un rango de puertos especificado y muestra cuáles están abiertos y cerrados.
+Este proyecto es una herramienta de escaneo de puertos TCP desarrollada en Python. Permite identificar qué puertos se encuentran abiertos o cerrados en una dirección IP específica, utilizando sockets y técnicas básicas de concurrencia.
 
-## Características
+El sistema cuenta con dos formas de uso:
 
-- Escaneo de puertos para una dirección IP específica.
-- Especificación de rango de puertos a escanear.
-- Resultados de escaneo con puertos abiertos y cerrados.
-- Interfaz gráfica amigable con `tkinter`.
-- Opción para realizar un nuevo escaneo sin reiniciar la aplicación.
+🖥️ Interfaz gráfica (GUI) desarrollada con tkinter
 
-## Requisitos
+⌨️ Interfaz por línea de comandos (CLI) para uso técnico y automatización
 
-Asegúrate de tener instaladas las siguientes dependencias:
+🚀 Características
 
-- Python 3.x
-- `tkinter` (viene preinstalado con Python)
-- `threading` (parte del paquete estándar de Python)
+Escaneo de puertos TCP para una IP específica
 
-### Ejecuta la aplicación
-python main.py
+Definición de rango de puertos (inicio y fin)
 
-### Instalación
+Identificación de puertos abiertos y cerrados
 
-1. Clona este repositorio:
+Interfaz gráfica amigable con tkinter
 
-   ```bash
-   git clone https://github.com/EricJoel-code/escaneo_puertos.git
+Interfaz CLI profesional mediante argumentos
 
-### Uso
+Escaneo en segundo plano sin bloquear la interfaz
 
-- Introducir Dirección IP: Escribe la dirección IP que deseas escanear en el campo correspondiente.
-- Especificar Rango de Puertos: Ingresa el puerto inicial y el puerto final que deseas escanear.
-- Iniciar Escaneo: Haz clic en el botón "Iniciar Escaneo" para comenzar. La aplicación mostrará los puertos abiertos y cerrados en el área de resultados.
-- Nuevo Escaneo: Una vez que el escaneo se complete, puedes hacer clic en el botón "Nuevo Escaneo" para limpiar los campos y realizar otro escaneo.
+Código modular y reutilizable
 
-### Ejemplo de IPs para Escanear
-Algunos ejemplos de direcciones IP que puedes usar para probar el escáner:
+Preparado para mejoras avanzadas (multithreading)
 
-- 127.0.0.1 (localhost)
-- 192.168.1.1 (dirección común de routers en redes domésticas)
-- 8.8.8.8 (DNS de Google)
+🧱 Estructura del Proyecto
+port_scanner/
+│
+├── scanner/
+│   ├── __init__.py
+│   └── scanner.py        # Lógica principal de escaneo
+│
+├── cli/
+│   ├── __init__.py
+│   └── cli_app.py        # Escáner por línea de comandos
+│
+├── app/
+│   └── app.py            # Interfaz gráfica (tkinter)
+│
+├── main.py               # Archivo Principal
+└── README.md
 
-### Contribuciones
-¡Las contribuciones son bienvenidas! Si encuentras errores o tienes sugerencias para nuevas funcionalidades, no dudes en crear un issue o hacer un pull request.
+📋 Requisitos
+
+Python 3.9 o superior
+
+Librerías estándar de Python:
+
+socket
+
+threading
+
+tkinter
+
+argparse
+
+No se requieren dependencias externas.
+
+🖥️ Uso — Interfaz Gráfica (GUI)
+
+Desde la carpeta raíz del proyecto:
+
+python gui/app.py
+
+Pasos:
+
+Ingresa la dirección IP objetivo
+
+Define el puerto inicial y final
+
+Haz clic en Iniciar Escaneo
+
+Visualiza los puertos abiertos y cerrados
+
+Usa Nuevo Escaneo para reiniciar
+
+⌨️ Uso — Línea de Comandos (CLI)
+
+Ejecuta el escáner desde la raíz del proyecto:
+
+python -m cli.cli_app -i 127.0.0.1 -s 1 -e 100
+
+Parámetros disponibles:
+Parámetro	Descripción
+-i	Dirección IP objetivo
+-s	Puerto inicial
+-e	Puerto final
+-h	Mostrar ayuda
+Ejemplo con salida a archivo:
+python -m cli.cli_app -i 127.0.0.1 -s 1 -e 100 > resultados.txt
+
+🧪 Ejemplos de IP para pruebas
+
+127.0.0.1 — localhost
+
+192.168.1.1 — router doméstico
+
+8.8.8.8 — DNS público de Google
+
+⚠️ Aviso Legal
+
+Este proyecto es solo para fines educativos.
+No escanees sistemas sin autorización explícita.
+
+🤝 Contribuciones
+
+Las contribuciones son bienvenidas.
+Puedes:
+
+Reportar errores
+
+Proponer mejoras
+
+Enviar pull requests
+
+🛣️ Roadmap
+
+ Escaneo secuencial de puertos
+
+ Interfaz gráfica (GUI)
+
+ Interfaz CLI
+
+ Escaneo multithreading
+
+ Exportación a CSV / HTML
+
+ Detección de servicios comunes
+
+ Medición de tiempos de respuesta
