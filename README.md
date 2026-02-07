@@ -131,7 +131,7 @@ Las contribuciones son bienvenidas. Puedes:
 * [x] Escaneo secuencial de puertos
 * [x] Interfaz gráfica (GUI)
 * [x] Interfaz CLI
-* [ ] Escaneo multithreading
+* [x] Escaneo multithreading
 * [ ] Exportación a CSV / HTML
 * [ ] Detección de servicios comunes
 * [ ] Medición de tiempos de respuesta

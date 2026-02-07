@@ -1,5 +1,6 @@
 #socket es una biblioteca que se utiliza para crear conexiones de red 
 import socket
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def scan_port(ip, port):
     """
@@ -37,10 +38,21 @@ def scan_ports(ip, start_port, end_port):
     open_ports = []
     closed_ports = []
 
-    for port in range(start_port, end_port + 1):
-        if scan_port(ip, port):
-            open_ports.append(port)
-        else:
-            closed_ports.append(port)
-
-    return open_ports, closed_ports
+    ports = range(start_port, end_port + 1)
+    #Utiliza un ThreadPoolExecutor para escanear los puertos en paralelo, lo que mejora el rendimiento.
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        future_to_port = {
+            executor.submit(scan_port, ip, port): port for port in ports
+        }
+        
+        for future in as_completed(future_to_port):
+            port = future_to_port[future]
+            try:
+                if future.result():
+                    open_ports.append(port)
+                else:
+                    closed_ports.append(port)
+            except Exception:
+                closed_ports.append(port)
+                
+    return sorted(open_ports), sorted(closed_ports)
