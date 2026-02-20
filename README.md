@@ -105,7 +105,7 @@ portscan -i 127.0.0.1 -s 1 -e 100 > resultados.txt
 Desde la carpeta raíz del proyecto:
 
 ```bash
-python -m app.py
+python -m gui.app
 ```
 
 ### Pasos

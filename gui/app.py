@@ -17,6 +17,7 @@ class PortScannerApp(tk.Tk):
         # Listas para almacenar los resultados
         self.open_ports = []
         self.closed_ports = []
+        self.elapsed_time = 0 # Variable para almacenar el tiempo de escaneo
 
         """
         Entradas de texto para la dirección IP y los puertos inicial y final.
@@ -75,23 +76,30 @@ class PortScannerApp(tk.Tk):
         scan_thread.start()
     
         
-        #Este método realiza el escaneo de puertos llamando a scan_ports y luego actualiza la interfaz gráfica con los resultados.
+    # Este método llama a la función scan_ports para realizar el escaneo de puertos y luego actualiza el área de resultados con los puertos abiertos, cerrados y el tiempo total del escaneo.
     def perform_scan(self, ip, start_port, end_port):
-        self.open_ports, self.closed_ports = scan_ports(ip, start_port, end_port)
+        self.open_ports, self.closed_ports, self.elapsed_time = scan_ports(ip, start_port, end_port)
         self.show_results()
         
         #Actualiza el área de resultados con los puertos abiertos y cerrados una vez completado el escaneo.
     def show_results(self):
         self.results_text.config(state='normal')
-        self.results_text.insert(tk.END, "\nEscaneo completo.\n")
-        self.results_text.insert(tk.END, "\nPuertos abiertos:\n")
-        for port in self.open_ports:
-            self.results_text.insert(tk.END, f"Puerto {port}: Abierto\n")
         
+        self.results_text.insert(tk.END, "\nEscaneo completo.\n")
+        self.results_text.insert(tk.END, f"Tiempo total: {self.elapsed_time} segundos\n")
+        
+        self.results_text.insert(tk.END, "\nPuertos abiertos:\n")
+        if self.open_ports:
+            for port in self.open_ports:
+                self.results_text.insert(tk.END, f"Puerto {port}: Abierto\n")
+                
+        else:
+            self.results_text.insert(tk.END, "Ninguno\n")
+            
         self.results_text.insert(tk.END, "\nPuertos cerrados:\n")
         for port in self.closed_ports:
             self.results_text.insert(tk.END, f"Puerto {port}: Cerrado\n")
-        
+            
         self.results_text.config(state='disabled')
 
     #Este método limpia los campos de entrada de dirección IP, puerto inicial y puerto final, así como el área de resultados, preparándolos para un nuevo escaneo.

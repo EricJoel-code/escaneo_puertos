@@ -25,19 +25,22 @@ def main():
     
     print(f"[+] Escaneando {ip} ({start_port}-{end_port})...\n")
 
-    # Llamar a la lógica reutilizada
-    open_ports, closed_ports = scan_ports(ip, start_port, end_port)
+    # Llamar a la lógica reutilizada, obteniendo los puertos abiertos, cerrados y el tiempo de escaneo.
+    open_ports, closed_ports, elapsed_time = scan_ports(ip, start_port, end_port)
 
     # Mostrar resultados
     print("[+] Puertos abiertos:")
-    for port in open_ports:
-        print(f"    [OPEN] {port}")
+    if open_ports:
+        for port in open_ports:
+            print(f"    [OPEN] {port}")
+    else:
+        print("    Ninguno")
 
     print("\n[-] Puertos cerrados:")
     for port in closed_ports:
         print(f"    [CLOSED] {port}")
 
-    print("\n[OK] Escaneo finalizado.")
+    print(f"\n[✔] Escaneo completado en {elapsed_time} segundos.")
 
 
 if __name__ == "__main__":
