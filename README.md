@@ -1,24 +1,26 @@
-# 🔍 Escáner de Puertos en Python
+# 🔍 PortScanner — Escáner de Puertos TCP en Python
 
-Este proyecto es una herramienta educativa de escaneo de puertos TCP desarrollada en Python. Permite identificar qué puertos se encuentran abiertos o cerrados en una dirección IP específica, utilizando sockets y técnicas básicas de concurrencia.
+EHerramienta profesional de escaneo de puertos TCP desarrollada en Python.
+Permite identificar puertos abiertos y cerrados en un host específico utilizando sockets y ejecución concurrente mediante multithreading.
 
-El sistema cuenta con dos formas de uso:
+El proyecto está estructurado como paquete instalable y puede ejecutarse como:
 
 * 🖥️ Interfaz gráfica (GUI) desarrollada con tkinter
-* ⌨️ Interfaz por línea de comandos (CLI) para uso técnico y automatización
+* ⌨️ Herramienta CLI profesional (portscan)
 
 ---
 
 ## 🚀 Características
 
-* Escaneo de puertos TCP para una IP específica
-* Definición de rango de puertos (inicio y fin)
+* Escaneo de puertos TCP
+* Definición de rango personalizado
 * Identificación de puertos abiertos y cerrados
-* Interfaz gráfica amigable con tkinter
-* Interfaz CLI profesional mediante argumentos
-* Escaneo en segundo plano sin bloquear la interfaz
+* Escaneo concurrente con multithreading
+* CLI profesional con argumentos
+* Interfaz gráfica no bloqueante
 * Código modular y reutilizable
-* Preparado para mejoras avanzadas (multithreading)
+* Instalación como paquete local (pip install -e .)
+* Preparado para expansión profesional
 
 ---
 
@@ -35,50 +37,50 @@ port_scanner/
 ├── gui/
 │   └── app.py            # Interfaz gráfica (tkinter)
 │
+├── venv/                 # Entorno virtual
+│
+├── setup.py
+├── requirements.txt
 ├── main.py               # Archivo principal
 └── README.md
 ```
 
 ---
 
-## 📋 Requisitos
+## 🛠 Instalación (Recomendado)
 
-* Python 3.9 o superior
-* Librerías estándar de Python:
+1️⃣ Crear entorno virtual
+```
+python -m venv venv
+```
+Activar:
 
-  * socket
-  * threading
-  * tkinter
-  * argparse
-
-No se requieren dependencias externas.
-
----
-
-## 🖥️ Uso — Interfaz Gráfica (GUI)
-
-Desde la carpeta raíz del proyecto:
-
-```bash
-python app/app.py
+Windows:
+```
+venv\Scripts\activate
+```
+Linux / macOS:
+```
+source venv/bin/activate
 ```
 
-### Pasos
-
-1. Ingresa la dirección IP objetivo
-2. Define el puerto inicial y final
-3. Haz clic en **Iniciar Escaneo**
-4. Visualiza los puertos abiertos y cerrados
-5. Usa **Nuevo Escaneo** para reiniciar
+2️⃣ Instalar el proyecto en modo editable
+```
+pip install -e .
+```
+Esto habilita el comando:
+```
+portscan
+```
 
 ---
 
-## ⌨️ Uso — Línea de Comandos (CLI)
+## ⌨️ Uso — CLI Profesional
 
 Ejecuta el escáner desde la raíz del proyecto:
 
 ```bash
-python -m cli.cli_app -i 127.0.0.1 -s 1 -e 100
+portscan -i 127.0.0.1 -s 1 -e 100
 ```
 
 ### Parámetros disponibles
@@ -93,8 +95,40 @@ python -m cli.cli_app -i 127.0.0.1 -s 1 -e 100
 ### Ejemplo con salida a archivo
 
 ```bash
-python -m cli.cli_app -i 127.0.0.1 -s 1 -e 100 > resultados.txt
+portscan -i 127.0.0.1 -s 1 -e 100 > resultados.txt
 ```
+
+---
+
+## 🖥️ Uso — Interfaz Gráfica (GUI)
+
+Desde la carpeta raíz del proyecto:
+
+```bash
+python -m app.py
+```
+
+### Pasos
+
+1. Ingresa la dirección IP objetivo
+2. Define el puerto inicial y final
+3. Haz clic en **Iniciar Escaneo**
+4. Visualiza los puertos abiertos y cerrados
+5. Usa **Nuevo Escaneo** para reiniciar
+
+---
+
+## 📋 Requisitos
+
+* Python 3.9 o superior
+* Librerías estándar de Python:
+
+  * socket
+  * threading
+  * tkinter
+  * argparse
+
+No se requieren dependencias externas.
 
 ---
 
@@ -131,7 +165,20 @@ Las contribuciones son bienvenidas. Puedes:
 * [x] Escaneo multithreading
 * [ ] Exportación a CSV / HTML
 * [ ] Detección de servicios comunes
-* [ ] Medición de tiempos de respuesta
+* [ ] Sistema de logs
+* [ ] MTests automatizados
+
+---
+
+## 🎯 Objetivo del Proyecto
+
+Proyecto enfocado en aprendizaje práctico de:
+
+* Sockets en Python
+* Concurrencia con threading
+* Arquitectura modular
+* Empaquetado profesional
+* Buenas prácticas de desarrollo
 
 ---
 

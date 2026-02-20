@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: portscanner
+Version: 1.0.0
+Summary: Multithreaded Port Scanner with CLI and GUI
+Author: Tu Nombre
+Requires-Python: >=3.8
+Dynamic: author
+Dynamic: requires-python
+Dynamic: summary
