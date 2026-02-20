@@ -27,15 +27,12 @@ El sistema cuenta con dos formas de uso:
 ```text
 port_scanner/
 │
-├── scanner/
+├── portscanner/
 │   ├── __init__.py
 │   └── scanner.py        # Lógica principal de escaneo
+│   └── cli.py            # Escáner por línea de comandos
 │
-├── cli/
-│   ├── __init__.py
-│   └── cli_app.py        # Escáner por línea de comandos
-│
-├── app/
+├── gui/
 │   └── app.py            # Interfaz gráfica (tkinter)
 │
 ├── main.py               # Archivo principal

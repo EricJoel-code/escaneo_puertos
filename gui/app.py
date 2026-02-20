@@ -5,7 +5,7 @@ import tkinter as tk
 #muestra mensajes de diálogo.
 from tkinter import ttk, messagebox
 #Importa la función scan_ports del módulo scanner que escanea un rango de puertos.
-from scanner.scanner import scan_ports
+from portscanner.scanner import scan_ports
 
 class PortScannerApp(tk.Tk):
     def __init__(self):

@@ -1,5 +1,6 @@
 import argparse
-from scanner.scanner import scan_ports
+#from portscanner.scanner import scan_ports
+from portscanner.scanner import scan_ports
 
 
 def main():
