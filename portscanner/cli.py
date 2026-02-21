@@ -14,6 +14,9 @@ def main():
     
     parser.add_argument("-e","--end", type=int, required=True, help="Puerto final del rango a escanear")
     
+    parser.add_argument("-t","--threads", type=int, default=100, help="Numero de hilos para el escaneo (default: 100)")
+    
+    parser.add_argument("--timeout", type=float, default=1, help="Tiempo de espera para cada conexión (default: 1 segundos)")
     
     # Leer los argumentos de la línea de comandos
     
@@ -22,11 +25,13 @@ def main():
     ip = args.ip
     start_port = args.start
     end_port = args.end
+    threads = args.threads
+    timeout = args.timeout
     
     print(f"[+] Escaneando {ip} ({start_port}-{end_port})...\n")
 
     # Llamar a la lógica reutilizada, obteniendo los puertos abiertos, cerrados y el tiempo de escaneo.
-    open_ports, closed_ports, elapsed_time = scan_ports(ip, start_port, end_port)
+    open_ports, closed_ports, elapsed_time = scan_ports(ip, start_port, end_port, threads=threads, timeout=timeout)
 
     # Mostrar resultados
     print("[+] Puertos abiertos:")
@@ -41,6 +46,7 @@ def main():
         print(f"    [CLOSED] {port}")
 
     print(f"\n[✔] Escaneo completado en {elapsed_time} segundos.")
+
 
 
 if __name__ == "__main__":

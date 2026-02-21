@@ -3,7 +3,7 @@ import socket
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time 
 
-def scan_port(ip, port):
+def scan_port(ip, port, timeout):
     """
     Escanea un puerto específico en una dirección IP.
     
@@ -14,7 +14,7 @@ def scan_port(ip, port):
     #Se crea un objeto de socket utilizando IPv4 (AF_INET) y TCP (SOCK_STREAM).
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     #Se establece un tiempo de espera de 1 segundo para la conexión.
-    sock.settimeout(1)
+    sock.settimeout(timeout)
     try:
         result = sock.connect_ex((ip, port))
         if result == 0:
@@ -26,7 +26,7 @@ def scan_port(ip, port):
     finally:
         sock.close()
 
-def scan_ports(ip, start_port, end_port):
+def scan_ports(ip, start_port, end_port, threads=100, timeout=1):
     """
     Escanea un rango de puertos en una dirección IP específica.
     
@@ -44,9 +44,9 @@ def scan_ports(ip, start_port, end_port):
 
     ports = range(start_port, end_port + 1)
     #Utiliza un ThreadPoolExecutor para escanear los puertos en paralelo, lo que mejora el rendimiento.
-    with ThreadPoolExecutor(max_workers=100) as executor:
+    with ThreadPoolExecutor(max_workers=threads) as executor:
         future_to_port = {
-            executor.submit(scan_port, ip, port): port for port in ports
+            executor.submit(scan_port, ip, port, timeout): port for port in ports
         }
         
         for future in as_completed(future_to_port):
@@ -60,7 +60,7 @@ def scan_ports(ip, start_port, end_port):
                 closed_ports.append(port)
                 
     # Se registra el tiempo de finalización del escaneo y se calcula el tiempo transcurrido, que se devuelve junto con las listas de puertos abiertos y cerrados.           
-    end_time = time.time()
-    elapsed_time = round(end_time - start_time, 4)
+    
+    elapsed_time = round(time.time() - start_time, 4)
                 
     return sorted(open_ports), sorted(closed_ports), elapsed_time
