@@ -15,12 +15,15 @@ El proyecto está estructurado como paquete instalable y puede ejecutarse como:
 * Escaneo de puertos TCP
 * Definición de rango personalizado
 * Identificación de puertos abiertos y cerrados
-* Escaneo concurrente con multithreading
-* CLI profesional con argumentos
+* Escaneo concurrente con multithreading configurable
+* Configuración de número de hilos (--threads)
+* Configuración de timeout por puerto (--timeout)
+* Medición del tiempo total de escaneo
+* CLI profesional con argumentos avanzados
 * Interfaz gráfica no bloqueante
 * Código modular y reutilizable
 * Instalación como paquete local (pip install -e .)
-* Preparado para expansión profesional
+* Arquitectura preparada para expansión profesional
 
 ---
 
@@ -75,7 +78,7 @@ portscan
 
 ---
 
-## ⌨️ Uso — CLI Profesional
+## ⌨️ Uso — CLI Profesional (Actualizado)
 
 Ejecuta el escáner desde la raíz del proyecto:
 
@@ -85,14 +88,22 @@ portscan -i 127.0.0.1 -s 1 -e 100
 
 ### Parámetros disponibles
 
-| Parámetro | Descripción           |
-| --------- | --------------------- |
-| -i        | Dirección IP objetivo |
-| -s        | Puerto inicial        |
-| -e        | Puerto final          |
-| -h        | Mostrar ayuda         |
+| Parámetro      | Descripción                                          |
+| -------------- | ---------------------------------------------------- |
+| -i/--i         | Dirección IP objetivo                                |
+| -s/--start     | Puerto inicial                                       |
+| -e/--end       | Puerto final                                         |
+| -t/--threads   | Número de hilos (default: 100)                       |
+| --timeout      | Tiempo de espera por puerto en segundos (default: 1) |
+| -h             | Mostrar ayuda                                        |
 
-### Ejemplo con salida a archivo
+### Ejemplo Avanzado
+
+```bash
+portscan -i 127.0.0.1 -s 1 -e 100 --threads 200 --timeout 0.5
+```
+
+### Redireccion de Salida
 
 ```bash
 portscan -i 127.0.0.1 -s 1 -e 100 > resultados.txt
@@ -163,10 +174,23 @@ Las contribuciones son bienvenidas. Puedes:
 * [x] Interfaz gráfica (GUI)
 * [x] Interfaz CLI
 * [x] Escaneo multithreading
+* [x] Configuración de threads y timeout
+* [x] Medición de tiempo de escaneo
 * [ ] Exportación a CSV / HTML
 * [ ] Detección de servicios comunes
 * [ ] Sistema de logs
-* [ ] MTests automatizados
+* [ ] Tests automatizados
+
+---
+
+## ⚙️ Configuración avanzada
+
+El escáner permite ajustar el rendimiento mediante:
+
+- --threads: Controla el número de hilos concurrentes.
+- --timeout: Define el tiempo máximo de espera por puerto.
+
+Esto permite adaptar la herramienta a redes rápidas o lentas.
 
 ---
 
